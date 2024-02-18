@@ -1,6 +1,6 @@
-import type { XOR } from 'ts-xor'
 import type { C2Chart } from '../type'
 import type { TemposContext } from './internal/context'
+import type { XOR } from './internal/xor.d'
 
 export function createChart(options: CreateChartOptions): C2Chart {
   const timeBase = options.timeBase ?? 480

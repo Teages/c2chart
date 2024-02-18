@@ -1,0 +1,225 @@
+{
+  "type": "object",
+  "properties": {
+    "format_version": {
+      "type": "number",
+      "const": 1,
+      "description": "The version of the format of the chart"
+    },
+    "time_base": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "description": "The time base of the chart, ticks per beat, prefer 480"
+    },
+    "start_offset_time": {
+      "type": "number",
+      "default": 0,
+      "description": "unused"
+    },
+    "tempo_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/tempo"
+      },
+      "description": "The list of tempos in the chart"
+    },
+    "page_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/page"
+      },
+      "description": "The list of pages in the chart"
+    },
+    "event_order_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/eventOrder"
+      },
+      "description": "The list of event order in the chart"
+    },
+    "note_list": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/note"
+      },
+      "description": "The list of notes in the chart"
+    }
+  },
+  "required": [
+    "format_version",
+    "time_base",
+    "tempo_list",
+    "page_list",
+    "event_order_list",
+    "note_list"
+  ],
+  "description": "The schema of a c2 chart",
+  "definitions": {
+    "tempo": {
+      "type": "object",
+      "properties": {
+        "tick": {
+          "type": "number",
+          "minimum": 0,
+          "description": "The time in ticks of the tempo change"
+        },
+        "value": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "The time of one beat (in μs), with time base 480 it same to 60,000,000 / BPM"
+        }
+      },
+      "required": [
+        "tick",
+        "value"
+      ],
+      "description": "The tempo of the chart"
+    },
+    "page": {
+      "type": "object",
+      "properties": {
+        "start_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The time in ticks of the page change"
+        },
+        "end_tick": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "description": "The time in ticks of the page change"
+        },
+        "scan_line_direction": {
+          "type": "number",
+          "enum": [
+            -1,
+            1
+          ],
+          "description": "The direction of the scan line, -1 is down, 1 is up"
+        }
+      },
+      "required": [
+        "start_tick",
+        "end_tick",
+        "scan_line_direction"
+      ],
+      "description": "The page of the chart"
+    },
+    "eventOrder": {
+      "type": "object",
+      "properties": {
+        "tick": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "The time in ticks of the events"
+        },
+        "event_list": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "number",
+                "enum": [
+                  0,
+                  1
+                ],
+                "description": "The type of the event, 0 is speed up, 1 is speed down"
+              },
+              "args": {
+                "type": "string",
+                "enum": [
+                  "W",
+                  "R",
+                  "G"
+                ],
+                "description": "The args of the speed event, it does no effect to playing:  'W' is speed equals base speed, 'R' is greater than the base speed, 'G' is less than the base speed,"
+              }
+            },
+            "required": [
+              "type",
+              "args"
+            ],
+            "description": "The event of the chart"
+          },
+          "description": "The events need to be executed at the time"
+        }
+      },
+      "required": [
+        "tick",
+        "event_list"
+      ],
+      "description": "The event order of the chart"
+    },
+    "note": {
+      "type": "object",
+      "properties": {
+        "page_index": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "description": "The page index of the note"
+        },
+        "type": {
+          "type": "number",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "description": "The type of the note. 0: Click, 1: Hold, 2: Long hold, 3: Drag, 4: Drag child, 5: Flick, 6: Click drag, 7: Click drag child"
+        },
+        "id": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The id of the note"
+        },
+        "tick": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "description": "The time in ticks of the note"
+        },
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "The x position of the note"
+        },
+        "has_sibling": {
+          "type": "boolean",
+          "description": "Is there are a note at the same tick",
+          "default": false
+        },
+        "hold_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "The length in ticks of the hold note"
+        },
+        "next_id": {
+          "type": "integer",
+          "minimum": -1,
+          "description": "The id of the next note",
+          "default": 0
+        },
+        "is_forward": {
+          "type": "boolean",
+          "description": "Is the note in the forward page",
+          "default": false
+        }
+      },
+      "required": [
+        "page_index",
+        "type",
+        "id",
+        "tick",
+        "x",
+        "hold_tick"
+      ],
+      "description": "The note of the chart"
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

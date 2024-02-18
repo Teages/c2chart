@@ -9,7 +9,7 @@ export function createChart(options: CreateChartOptions): C2Chart {
 
   const tempoListWithTime = options.tempoList
     ? options.tempoList.toSorted((a, b) => a.time - b.time)
-    : options.bpmList.map(({ time, value }) => ({ time, value: 60_000_000 / value }))
+    : options.bpmList.map(({ time, value }) => ({ time, value: Math.round(60_000_000 / value) }))
 
   const tempoList: TemposContext = new Map()
   const timeToTick = (time: number) => {
@@ -22,7 +22,7 @@ export function createChart(options: CreateChartOptions): C2Chart {
       throw new Error('C2 chart does not support offset, the first tempo must be at time 0')
     }
 
-    return tempo.tick + (time - tempo.time) * 1_000 * timeBase / tempo.value
+    return tempo.tick + Math.round((time - tempo.time) * 1_000 * timeBase / tempo.value)
   }
 
   tempoListWithTime.forEach(({ time, value }) => {

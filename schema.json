@@ -21,6 +21,7 @@
       "items": {
         "$ref": "#/definitions/tempo"
       },
+      "minItems": 1,
       "description": "The list of tempos in the chart"
     },
     "page_list": {

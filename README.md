@@ -1,23 +1,3 @@
-# Package Template
-
-fork from [unjs/template](https://github.com/unjs/template).
-
-## Use this template
-
-```bash
-npx giget@latest gh:teages/template @teages/c2chart
-```
-
-> [!NOTE]
-> TODO:
-> - [ ] Update package name: replace `@teages/c2chart` with your package name
-> - [ ] Update author name: replace `teages` with your name
-> - [ ] Install autofix.ci
-> - [ ] Update package description
-> - [ ] Update usage examples
-> - [ ] Update playground examples
-> - [ ] Remove things before this line
-
 # @teages/c2chart
 
 [![npm version][npm-version-src]][npm-version-href]
@@ -26,7 +6,7 @@ npx giget@latest gh:teages/template @teages/c2chart
 <!-- [![bundle][bundle-src]][bundle-href] -->
 <!-- [![Codecov][codecov-src]][codecov-href] -->
 
-This is my package description.
+Parse a C2 chart into a structured and type safe object with useful utilities.
 
 ## Usage
 

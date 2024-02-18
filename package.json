@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "packageManager": "pnpm@8.15.1",
-  "description": "",
+  "description": "Parse a C2 chart into a structured and type safe object with useful utilities.",
   "license": "MIT",
   "repository": "Teages/c2chart",
   "sideEffects": false,

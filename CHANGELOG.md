@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/Teages/c2chart/compare/v0.0.2...v0.0.3)
+
+### 🩹 Fixes
+
+- Unexpected float number in createChart ([69a4c23](https://github.com/Teages/c2chart/commit/69a4c23))
+
+### ❤️ Contributors
+
+- Teages ([@Teages](http://github.com/Teages))
+
 ## v0.0.2
 
 [compare changes](https://github.com/Teages/c2chart/compare/v0.0.1...v0.0.2)

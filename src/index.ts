@@ -1,4 +1,4 @@
-import { type ZodIssue, number } from 'zod'
+import type { ZodIssue } from 'zod'
 import type { C2Chart } from './type.d'
 import c2ChartSchema from './schema'
 
